@@ -33,7 +33,7 @@ def extract_text_from_pdf(file_path: str) -> str:
 
 def chunk_and_store_text(db: Chroma, text: str) -> int:
     """Chunk text and store embeddings in Chroma."""
-    splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=20)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=250, chunk_overlap=20)
     chunks: List[str] = splitter.split_text(text)
     db.add_texts(chunks)  # automatically persisted
     return len(chunks)
