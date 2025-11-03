@@ -5,7 +5,6 @@ from langchain_ollama import ChatOllama
 
 llm = ChatOllama(
     model="llama2:7b",
-    temperature=0,
 )
 
 def get_retriever(k: int = 3):
@@ -25,15 +24,22 @@ def answer_query(query: str, k: int = 3):
     context = "\n\n".join(chunks)
 
     prompt = f"""
-You are a helpful assistant. Use the following context to answer the question.
+    You are an intelligent, friendly, and articulate assistant. Your goal is to answer questions using the provided context, but also to add human-like understanding, creativity, and clarity. 
 
-Context:
-{context}
+    Guidelines:
+    - Use the context to ensure your answer is accurate and relevant.
+    - Explain concepts clearly, as if you are teaching someone.
+    - Make your response engaging, natural, and easy to read.
+    - Avoid simply copying the context; instead, synthesize it and add insights or examples where appropriate.
+    - If the context is insufficient/not present, make reasonable assumptions based on common knowledge and clearly indicate them.
 
-Question:
-{query}
+    Context:
+    {context}
 
-Answer:"""
+    Question:
+    {query}
+
+    Answer:"""
 
     # Send prompt to Ollama (replace 'llama7b' with your installed model name)
     messages=[{"role": "user", "content": prompt}]
